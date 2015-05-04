@@ -17,8 +17,8 @@ package de.ethinking.gradle.gaffer.tasks;
 
 import java.io.File
 
-import de.ethinking.gradle.assemble.ApplicationAssemble
-import de.ethinking.gradle.assemble.CopyFromSource
+import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
+import de.ethinking.gradle.gaffer.assemble.CopyFromSource
 import de.ethinking.gradle.gaffer.report.DeploymentReport
 
 import org.gradle.api.DefaultTask

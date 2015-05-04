@@ -1,4 +1,4 @@
-package de.ethinking.gradle.assemble
+package de.ethinking.gradle.gaffer.assemble
 
 import de.ethinking.gradle.gaffer.LifecycleState
 import de.ethinking.gradle.repository.DynamicDependencyResolver

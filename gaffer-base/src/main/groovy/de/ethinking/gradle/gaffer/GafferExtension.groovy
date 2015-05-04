@@ -15,10 +15,10 @@
 */
 package de.ethinking.gradle.gaffer
 
-import de.ethinking.gradle.assemble.ApplicationAssemble
-import de.ethinking.gradle.assemble.ContainerAssemble
-import de.ethinking.gradle.assemble.ProfileAssemble
-import de.ethinking.gradle.assemble.WebappAssemble
+import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
+import de.ethinking.gradle.gaffer.assemble.ContainerAssemble
+import de.ethinking.gradle.gaffer.assemble.ProfileAssemble
+import de.ethinking.gradle.gaffer.assemble.WebappAssemble
 
 import org.gradle.api.Project
 

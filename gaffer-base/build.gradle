@@ -1,3 +1,6 @@
+apply plugin: 'maven'
+
+
 evaluationDependsOn ':gaffer-report'
 
 jar.dependsOn ':gaffer-report:bundle'
@@ -5,5 +8,14 @@ jar.dependsOn ':gaffer-report:bundle'
 jar {
     into('report') {
         from project(':gaffer-report').bundle.outputs.files
+    }
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(System.properties['user.home']+'/.localmavenrepo/'))
+        }
     }
 }

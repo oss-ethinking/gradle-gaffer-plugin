@@ -24,8 +24,8 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
-import de.ethinking.gradle.assemble.WebappAssemble
-import de.ethinking.gradle.assemble.WebappAssemble.WebappDependency
+import de.ethinking.gradle.gaffer.assemble.WebappAssemble
+import de.ethinking.gradle.gaffer.assemble.WebappAssemble.WebappDependency
 import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.repository.DynamicDependencyResolver
 

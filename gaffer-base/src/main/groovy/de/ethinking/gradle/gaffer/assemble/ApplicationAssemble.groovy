@@ -1,8 +1,8 @@
-package de.ethinking.gradle.assemble
+package de.ethinking.gradle.gaffer.assemble
 
 import java.io.File;
 
-import de.ethinking.gradle.assemble.BaseAssemble.Type
+import de.ethinking.gradle.gaffer.assemble.BaseAssemble.Type
 import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.gaffer.LifecycleState
 import de.ethinking.gradle.repository.DynamicDependencyResolver
@@ -33,11 +33,5 @@ class ApplicationAssemble extends BaseAssemble{
 		return dependencies
 	}
 	
-	
-//	def switchState(LifecycleState state){
-//		this.lifecycleState = state
-//		copyExtensions.each{ CopyFromSource copy ->
-//			copy.switchState(state)
-//		}
-//	}
+
 }

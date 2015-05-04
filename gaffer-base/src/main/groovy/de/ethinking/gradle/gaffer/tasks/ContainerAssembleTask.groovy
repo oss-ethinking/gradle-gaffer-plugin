@@ -18,7 +18,7 @@ package de.ethinking.gradle.gaffer.tasks
 import org.gradle.api.tasks.TaskAction
 
 
-import de.ethinking.gradle.assemble.ContainerAssemble
+import de.ethinking.gradle.gaffer.assemble.ContainerAssemble
 
 class ContainerAssembleTask extends BaseAssembleTask{
 

@@ -15,7 +15,7 @@
 */
 package de.ethinking.gradle.gaffer.report
 
-import de.ethinking.gradle.assemble.BaseAssemble.Type
+import de.ethinking.gradle.gaffer.assemble.BaseAssemble.Type
 import org.gradle.api.file.FileCopyDetails
 
 class TaskReport {

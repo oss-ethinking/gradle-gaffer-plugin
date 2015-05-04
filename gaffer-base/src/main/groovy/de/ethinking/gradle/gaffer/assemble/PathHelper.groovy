@@ -1,4 +1,4 @@
-package de.ethinking.gradle.assemble
+package de.ethinking.gradle.gaffer.assemble
 
 import java.nio.file.Path
 import java.nio.file.Paths

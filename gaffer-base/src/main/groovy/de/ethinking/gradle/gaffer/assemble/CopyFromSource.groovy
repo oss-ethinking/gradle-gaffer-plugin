@@ -1,4 +1,4 @@
-package de.ethinking.gradle.assemble
+package de.ethinking.gradle.gaffer.assemble
 
 import de.ethinking.gradle.gaffer.report.CopyReport
 import de.ethinking.gradle.gaffer.report.TaskReport

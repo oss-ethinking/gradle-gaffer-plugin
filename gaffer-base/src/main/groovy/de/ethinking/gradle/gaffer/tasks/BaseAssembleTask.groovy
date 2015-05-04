@@ -20,12 +20,12 @@ import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
-import de.ethinking.gradle.assemble.ApplicationAssemble
+import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
 
-import de.ethinking.gradle.assemble.BaseAssemble
-import de.ethinking.gradle.assemble.CopyFromSource
-import de.ethinking.gradle.assemble.WebappAssemble
-import de.ethinking.gradle.assemble.WebappAssemble.WebappDependency
+import de.ethinking.gradle.gaffer.assemble.BaseAssemble
+import de.ethinking.gradle.gaffer.assemble.CopyFromSource
+import de.ethinking.gradle.gaffer.assemble.WebappAssemble
+import de.ethinking.gradle.gaffer.assemble.WebappAssemble.WebappDependency
 import de.ethinking.gradle.gaffer.report.CopyReport
 import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.gaffer.report.TaskReport
