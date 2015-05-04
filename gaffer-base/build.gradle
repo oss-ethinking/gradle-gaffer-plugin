@@ -1,0 +1,9 @@
+evaluationDependsOn ':gaffer-report'
+
+jar.dependsOn ':gaffer-report:bundle'
+
+jar {
+    into('report') {
+        from project(':gaffer-report').bundle.outputs.files
+    }
+}

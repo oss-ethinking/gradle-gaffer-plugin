@@ -1,0 +1,9 @@
+<md-input-container> 
+<label>Search</label>
+<input type="text" ng-model="queryFilter.query" /> 
+</md-input-container>
+<ul>
+	<li ng-repeat="assemble in report.taskReports | filter:searchFilter">
+	  <assemble data="assemble"/>
+	</li>
+</ul>

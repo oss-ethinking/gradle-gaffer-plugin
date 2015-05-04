@@ -1,0 +1,48 @@
+plugins { id "org.kordamp.gradle.livereload" version "0.2.1" }
+
+apply plugin:'war'
+apply plugin:'jetty'
+
+version = ''
+
+task bundle(type: Zip) {
+	File templateDir = project.file('src/main/webapp/templates')
+	
+	def buffer = new StringBuffer()
+	
+	templateDir.listFiles().each{ File templateFile ->
+		buffer << "\n<script type=\"text/ng-template\" id=\"/templates/"+templateFile.getName()+"\">\n"
+		buffer << templateFile.text
+		buffer << "\n</script>\n"
+	}
+	
+	buffer << "</body>"
+	
+	
+		from 'src/main/webapp'
+		filter {
+			it.replace('</body>',buffer)
+		}
+		exclude 'report.js'
+		exclude 'WEB-INF'
+}
+
+
+httpPort=8080
+stopPort=8091
+jettyRun.contextPath = '/'
+
+liveReload{
+	
+	doFirst {
+		jettyRun.daemon = true
+		jettyRun.execute()
+	}
+	
+	doLast {
+		jettyStop.execute()
+	}
+	
+	docRoot = project.file("src/main/webapp")
+	
+}

@@ -1,0 +1,16 @@
+.svn
+.project
+.gradle
+.settings
+.classpath
+.repo
+.sass-cache
+.idea
+*.iml
+.DS_Store
+
+build
+bin
+${catalina.base}
+/nbproject/private/
+
