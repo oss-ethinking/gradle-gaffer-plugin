@@ -75,7 +75,7 @@ gaffer{      //<1>
 
 == Gaffer Tasks
 
-The Gradle Gaffer plugin will generate a set of dynamic tasks from the declared applications, profiles and containers inside the gaffer extenstion. You can use the tasks and its output in other task to deploy the assembled containers by ssh or into a Docker container.
+The Gradle Gaffer plugin will generate a set of dynamic tasks from the declared applications, profiles and containers inside the gaffer extenstion. You can use the tasks and its output in other tasks to deploy the assembled containers via ssh or into a Docker container.
 
 ----
 assemble-container-<container name>
@@ -84,7 +84,7 @@ assemble-container-<container name>
 
 == Usage Example
 
-We use the gaffer plugin for assembling different web applications into applications servers. In this exampble we orchestrate some common monitoring web applications and a solr release into an tomcat release. 
+We use the gaffer plugin for assembling different web applications into applications servers. In this example we orchestrate some common monitoring web applications and a solr release into a tomcat release. 
  
 
 .Example build.gradle 
@@ -155,7 +155,7 @@ $builDir/assemble/container/<container name>/
 
 
 == Gaffer Report
-The Gaffer Report is a small AngularJS App which provide informations about the assembled files. You must activate the report by setup the *reportTarget* property inside the container to a desired location.
+The Gaffer Report is a small AngularJS App which provides information about the assembled files. In order to activate the report set up the *reportTarget* property inside the container to the desired location.
 
 
 [source, groovy]
