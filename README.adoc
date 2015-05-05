@@ -72,13 +72,14 @@ gaffer{      //<1>
   
 
 
-[source, groovy]
-----
-gaffer {
-  
-}
-----
+
 == Gaffer Tasks
+
+The Gradle Gaffer plugin will generate a set of dynamic tasks from the declared applications, profiles and containers inside the gaffer extenstion. You can use the tasks and its output in other task to deploy the assembled containers by ssh or into a Docker container.
+
+----
+assemble-container-<container name>
+----
 
 
 == Usage Example
