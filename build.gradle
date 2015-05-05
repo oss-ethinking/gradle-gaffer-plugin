@@ -10,6 +10,7 @@ buildscript {
 apply plugin: 'org.asciidoctor.gradle.asciidoctor'
 apply plugin: 'com.github.jruby-gradle.base'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 
 version='0.7.1'

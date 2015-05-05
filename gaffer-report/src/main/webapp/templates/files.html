@@ -1,34 +1,35 @@
-
 <h3>Files</h3>
 <ul ng-repeat="assemble in report.taskReports">
-	<li ng-repeat="copy in assemble.copyReports"><a href="#{{assemble.name}}{{$index}}">{{$index+1}}. {{assemble.assemble}} Copy files:{{copy.files.length}}</a></li>
+    <li ng-repeat="copy in assemble.copyReports"><a href="#{{assemble.name}}{{$index}}">{{$index+1}}. {{assemble.assemble}} Copy files:{{copy.files.length}}</a></li>
 </ul>
 <div ng-repeat="assemble in report.taskReports">
-	<h4>{{assemble.type}}:{{assemble.assemble}}</h4>
-	<div ng-repeat="copy in assemble.copyReports">
-		<h5>
-			<a name="{{assemble.name}}{{$index}}">{{$index+1}}.Copy to {{assemble.assemble}}</a>
-		</h5>
-		<p ng-if="copy.projects.length > 0">Project:{{copy.projects}}</p>
-		<table>
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Name</th>
-					<th>Path</th>
-					<th>Size</th>
-					<th>Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="file in copy.files">
-					<td>{{$index+1}}</td>
-					<td>{{file.name}}</td>
-					<td>{{file.path}}</td>
-					<td>{{file.bytes}}</td>
-					<td>{{file.timestamp | date:dateFormat}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+    <h4>{{assemble.type}}:{{assemble.assemble}}</h4>
+
+    <div ng-repeat="copy in assemble.copyReports">
+        <h5>
+            <a name="{{assemble.name}}{{$index}}">{{$index+1}}.Copy to {{assemble.assemble}}</a>
+        </h5>
+
+        <p ng-if="copy.projects.length > 0">Project:{{copy.projects}}</p>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Path</th>
+                <th>Size</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="file in copy.files">
+                <td>{{$index+1}}</td>
+                <td>{{file.name}}</td>
+                <td>{{file.path}}</td>
+                <td>{{file.bytes}}</td>
+                <td>{{file.timestamp | date:dateFormat}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

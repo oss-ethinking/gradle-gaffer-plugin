@@ -1,7 +1,8 @@
-
-<md-grid-list md-cols="1" md-row-height="16:9" > 
-	 <md-grid-tile ng-repeat="assemble in report.taskReports">
-		<div>{{$index+1}} {{assemble.assemble}} {{assemble.type}} {{assemble.name}} {{assemble.files}} {{assemble.bytes}}</div>
-	</md-grid-tile> 
-</md-grid-list>
-
+<md-list>
+    <md-list-item class="md-2-line" ng-repeat="assemble in report.taskReports">
+        <div class="md-list-item-text">
+            <h3>{{$index+1}} {{assemble.assemble}} {{assemble.type}} {{assemble.name}}</h3>
+            <p>Files: {{assemble.files}} Bytes: {{assemble.bytes}}</p>
+        </div>
+    </md-list-item>
+</md-list>
