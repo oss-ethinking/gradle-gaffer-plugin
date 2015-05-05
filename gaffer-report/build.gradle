@@ -3,6 +3,7 @@ plugins { id "org.kordamp.gradle.livereload" version "0.2.1" }
 apply plugin:'war'
 apply plugin:'jetty'
 
+
 version = ''
 
 task bundle(type: Zip) {
@@ -49,4 +50,3 @@ liveReload{
 	
 }
 
-println "Dir"+project.webAppDir

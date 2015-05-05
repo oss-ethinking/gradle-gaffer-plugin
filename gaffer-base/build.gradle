@@ -1,5 +1,18 @@
-apply plugin: 'maven'
+buildscript {
+    repositories {
+      maven {
+        url "https://plugins.gradle.org/m2/"
+      }
+    }
+    dependencies {
+      classpath "com.gradle.publish:plugin-publish-plugin:0.9.0"
+    }
+}
+  
+  
 
+apply plugin: 'maven'
+apply plugin: "com.gradle.plugin-publish"
 
 evaluationDependsOn ':gaffer-report'
 
@@ -19,3 +32,18 @@ uploadArchives {
         }
     }
 }
+
+pluginBundle {
+  website = 'https://github.com/oss-ethinking/gradle-gaffer-plugin'
+  vcsUrl = 'https://github.com/oss-ethinking/gradle-gaffer-plugin'
+  description = 'The Gradle Gaffer plugin provides a DSL for preparing complex deployment tasks. It works like the distribution plugin but with a different use case.'
+  tags = ['gaffer', 'assemble']
+
+  plugins {
+    greetingsPlugin {
+      id = 'de.ethinking.gaffer'
+      displayName = 'Gradle Gaffer plugin'
+    }
+  }
+}
+
