@@ -7,7 +7,7 @@ v1.0, 2014-09-21 eThinking Escenic/Deploy Plugin DSL
 :icons: font
 
 
-The Gradle Gaffer plugin provides a DSL for preparing complex  deployment tasks 
+The Gradle Gaffer plugin provides a DSL for preparing complex deployment tasks. It works like the distribution plugin but with a different use case.
 
 == Usage
 Include the following in your Gradle build script:
@@ -147,5 +147,25 @@ Execute Gaffer assemble task by
 gradle assemble-container-searchserver
 ----
 
+You will find the generated assembled files in 
+
+----
+$builDir/assemble/container/<container name>/
+----
+
 
 == Gaffer Report
+The Gaffer Report is a small AngularJS App which provide informations about the assembled files. You must activate the report by setup the *reportTarget* property inside the container to a desired location.
+
+
+[source, groovy]
+----
+gaffer{
+   ...
+  container{
+     name="searchserver"
+     
+     reportTarget='opt/tomcat/webapps/report'
+  }
+}
+----
