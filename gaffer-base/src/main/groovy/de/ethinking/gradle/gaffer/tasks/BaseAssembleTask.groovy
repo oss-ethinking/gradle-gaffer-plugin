@@ -128,17 +128,8 @@ class BaseAssembleTask extends DefaultTask {
 
 		File webinf = new File(reportBase,"WEB-INF")
 		webinf.mkdirs()
-		explodeReportWebapp("/report/report.zip", reportBase)
+		explodeReportWebapp("/report/gaffer-report.zip", reportBase)
 		
-//		store("index.html",reportBase)
-//		store("app.js",reportBase)
-//		store("css/main.css",reportBase)
-//		store("lib/css/foundation.min.css",reportBase)
-//		store("lib/css/normalize.css",reportBase)
-//		store("lib/js/foundation.min.js",reportBase)
-//		store("lib/js/vendor/jquery.js",reportBase)
-//		store("lib/js/foundation/foundation.js",reportBase)
-//		store("lib/js/foundation/foundation.topbar.js",reportBase)
 	}
 
 

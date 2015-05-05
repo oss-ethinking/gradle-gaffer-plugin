@@ -10,15 +10,141 @@ v1.0, 2014-09-21 eThinking Escenic/Deploy Plugin DSL
 The Gradle Gaffer plugin provides a DSL for preparing complex  deployment tasks 
 
 == Usage
+Include the following in your Gradle build script:
 
+
+[source, groovy]
+----
+plugins {
+  id "de.ethinking.gaffer" version "0.7.0"
+}
+----
 
 == Gaffer DSL
 
 
-== Custom Tasks
+== Plugin de.ethinking.deploy
+
+.Example build.gradle 
+[source, groovy]
+----
+plugins {
+  id "de.ethinking.gaffer" version "x.x.y"
+}
+
+gaffer{      //<1>
+    application{      //<2>
+        name = 'tomcat'
+        copy{   
+            from ...
+            into ...
+        }
+    }
+    application{      //<3>
+        name = 'springboot-app'
+        copy{   
+            from ...
+            into ...
+        }
+    }
+    profile{
+    
+    }
+    container{
+    
+    }
+}
+
+----
+<1> Gaffer plugin extension 
+<2> an application definition
+<3> a second application definition
+<4> profile definition
+<5> container definition 
+
+
+=== Deploy Pipeline
+
+ * Build depending projects
+ * Assemble webapps
+ * Prepare applications
+ * Assemble applications from profiles
+  
+
+
+[source, groovy]
+----
+gaffer {
+  
+}
+----
+== Gaffer Tasks
 
 
 == Usage Example
+
+We use the gaffer plugin for assembling different web applications into applications servers. In this exampble we orchestrate some common monitoring web applications and a solr release into an tomcat release. 
+ 
+
+.Example build.gradle 
+[source, groovy]
+----
+plugins {
+  id "de.ethinking.gaffer" version "0.7.0"
+}
+
+repositories{
+    ivy{
+       url 'http://mirror.netcologne.de/apache.org/tomcat/tomcat-8/'
+       layout "pattern", {artifact "v[revision]/bin/[artifact]-[revision].zip"}
+    }
+}
+
+gaffer{      //<1>
+    application{      //<2>
+        name = 'tomcat'
+        copy{   
+            from  distributionDependency('org.apache:apache-tomcat:8.0.21')
+            into '/opt/tomcat'
+            }
+    }
+    profile{
+        name = 'solr4'    
+        application{
+            name='tomcat'
+            copy{
+               from flatDependency('org.apache.solr:solr:4.10.4@war')
+               into '/opt/tomcat/webapps/solr'
+	    }		   
+    }
+	profile{
+	    name = 'monitoring'
+        application{
+            name='tomcat'
+            copy{
+               from flatDependency('org.jolokia:jolokia-war:1.2.3@war')
+               into '/opt/tomcat/webapps/jolokia'
+            }
+            copy{
+               from flatDependency('com.netflix.hystrix:hystrix-dashboard:1.4.5@war')
+               into '/opt/tomcat/webapps/hystrix-dashboard'
+            }
+        }			
+	}	 
+  }
+  container{
+     name="searchserver"
+     profiles "solr4","monitoring"
+     reportTarget='opt/tomcat/webapps/report'
+  }
+}
+----
+
+Execute Gaffer assemble task by 
+
+----
+gradle assemble-container-searchserver
+----
 
 
 == Gaffer Report
