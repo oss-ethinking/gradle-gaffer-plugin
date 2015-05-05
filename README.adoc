@@ -1,0 +1,24 @@
+= Gradle Gaffer plugin
+Simon Mieth <sm@ethinking.de>
+v1.0, 2014-09-21 eThinking Escenic/Deploy Plugin DSL
+:toc: left
+:toclevels: 4
+:source-highlighter: coderay
+:icons: font
+
+
+The Gradle Gaffer plugin provides a DSL for preparing complex  deployment tasks 
+
+== Usage
+
+
+== Gaffer DSL
+
+
+== Custom Tasks
+
+
+== Usage Example
+
+
+== Gaffer Report

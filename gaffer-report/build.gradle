@@ -31,6 +31,8 @@ task bundle(type: Zip) {
 httpPort=8080
 stopPort=8091
 jettyRun.contextPath = '/'
+jettyRun.webAppSourceDirectory = project.file("src/main/webapp")
+jettyRun.scanIntervalSeconds=1
 
 liveReload{
 	
@@ -46,3 +48,5 @@ liveReload{
 	docRoot = project.file("src/main/webapp")
 	
 }
+
+println "Dir"+project.webAppDir

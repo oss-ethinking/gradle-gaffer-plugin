@@ -24,19 +24,19 @@
 	   <button ng-click="toggleSidenav('left')" hide-gt-sm class="menuBtn">
             <span class="visually-hidden">Menu</span>
         </button>
-		<span>Assemble Report</span>
+		<span>Gaffer Report</span>
 		<!-- fill up the space between left and right area -->
 		<span flex></span>
 	</div>
 	</md-toolbar>
 	<div flex layout="row">
-		<md-sidenav  md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2 md-padding"> 
-			<md-button class="md-primary" ng-click="content='/templates/dashboard.html'">Dashboard</md-button> 
-			<md-button class="md-primary" ng-click="content='/templates/tasks.html'">Tasks</md-button>
-			<md-button class="md-primary" ng-click="content='/templates/files.html'">Files</md-button> 
-			<md-button class="md-primary" ng-click="content='/templates/search.html'">Search</md-button> 
+		<md-sidenav  class="md-sidenav-left md-whiteframe-z2 md-padding" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')"> 
+				<md-button class="md-primary" ng-click="content='/templates/dashboard.html'">Dashboard</md-button> 
+				<md-button class="md-primary" ng-click="content='/templates/tasks.html'">Tasks</md-button>
+				<md-button class="md-primary" ng-click="content='/templates/files.html'">Files</md-button> 
+				<md-button class="md-primary" ng-click="content='/templates/search.html'">Search</md-button> 
 		</md-sidenav>
-		<md-content  flex id="content"  ng-include src="content" class="md-padding"> </md-content>
+		<md-content  flex id="content"  ng-include src="content" layout-padding> </md-content>
 	</div> 
 </body>
 </html>
