@@ -39,7 +39,6 @@ pluginBundle {
   description = 'The Gradle Gaffer plugin provides a DSL for preparing complex deployment tasks. It works like the distribution plugin but with a different use case.'
   tags = ['gaffer', 'assemble']
   
-  
   plugins {
     gafferPlugin {
       id = 'de.ethinking.gaffer'

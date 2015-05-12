@@ -1,7 +1,7 @@
 package de.ethinking.gradle.gaffer.assemble
 
 import de.ethinking.gradle.gaffer.LifecycleState
-import de.ethinking.gradle.repository.DynamicDependencyResolver
+import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
 
 import org.gradle.api.Project
 import org.gradle.api.Task

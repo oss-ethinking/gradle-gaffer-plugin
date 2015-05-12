@@ -4,8 +4,8 @@ import java.io.File;
 
 import de.ethinking.gradle.gaffer.assemble.BaseAssemble.Type
 import de.ethinking.gradle.gaffer.report.DeploymentReport
+import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
 import de.ethinking.gradle.gaffer.LifecycleState
-import de.ethinking.gradle.repository.DynamicDependencyResolver
 
 import org.gradle.api.Project
 import org.gradle.api.file.CopySpec

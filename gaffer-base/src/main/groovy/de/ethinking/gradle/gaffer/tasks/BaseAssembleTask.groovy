@@ -21,7 +21,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
 import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
-
 import de.ethinking.gradle.gaffer.assemble.BaseAssemble
 import de.ethinking.gradle.gaffer.assemble.CopyFromSource
 import de.ethinking.gradle.gaffer.assemble.WebappAssemble
@@ -29,7 +28,7 @@ import de.ethinking.gradle.gaffer.assemble.WebappAssemble.WebappDependency
 import de.ethinking.gradle.gaffer.report.CopyReport
 import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.gaffer.report.TaskReport
-import de.ethinking.gradle.repository.DynamicDependencyResolver
+import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
 
 import org.codehaus.groovy.ast.ClassNode
 import org.gradle.api.DefaultTask
@@ -41,6 +40,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.tooling.BuildException
+
 import groovy.json.*
 
 

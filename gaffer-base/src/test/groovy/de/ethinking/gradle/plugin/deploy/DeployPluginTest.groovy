@@ -58,7 +58,7 @@ class DeployPluginTest{
 				application{
 					name = 'tomcat'
 					copy{
-						from distribution('org.apache:apache-tomcat:8.0.14')
+						from distributionDependency('org.apache:apache-tomcat:8.0.14')
 						into '/opt/tomcat'
 					}
 					copy{
@@ -69,7 +69,7 @@ class DeployPluginTest{
 				}
 				application("tomcat7"){
 					copy{
-						from distribution('org.apache:apache-tomcat:7.0.59')
+						from distributionDependency('org.apache:apache-tomcat:7.0.59')
 						into '/opt/tomcat'
 					}
 		

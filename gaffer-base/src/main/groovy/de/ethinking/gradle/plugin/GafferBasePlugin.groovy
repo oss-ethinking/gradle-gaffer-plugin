@@ -26,11 +26,11 @@ import de.ethinking.gradle.gaffer.assemble.WebappAssemble
 import de.ethinking.gradle.gaffer.GafferExtension
 import de.ethinking.gradle.gaffer.LifecycleState
 import de.ethinking.gradle.gaffer.report.DeploymentReport
+import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
 import de.ethinking.gradle.gaffer.tasks.ApplicationAssembleTask
 import de.ethinking.gradle.gaffer.tasks.ContainerAssembleTask
 import de.ethinking.gradle.gaffer.tasks.ProfileApplicationAssembleTask
 import de.ethinking.gradle.gaffer.tasks.WebappAssembleTask
-import de.ethinking.gradle.repository.DynamicDependencyResolver
 
 class GafferBasePlugin  implements Plugin<Project> {
 
@@ -190,8 +190,6 @@ class GafferBasePlugin  implements Plugin<Project> {
                 }
             }
 
-
-
             String taskName = "assemble-container-"+containerAssemble.name
             project.task(taskName,dependsOn:containerDependencies,type:ContainerAssembleTask,group:"container assemble"){
                 setAssemble(containerAssemble)
@@ -202,11 +200,13 @@ class GafferBasePlugin  implements Plugin<Project> {
         }
     }
 
-    public static void addClosures(Project project){
+ 
+       public static void addClosures(Project project){
         project.ext.webapp = { String webappName ->
             def directory = new File(project.getBuildDir(),"assemble/webapp/"+webappName)
             return directory
         }
+        
         project.ext.distributionDependency= { String distribution ->
             try{
                 if(project.gaffer.lifecycleState==LifecycleState.INITIALIZING){
@@ -229,6 +229,7 @@ class GafferBasePlugin  implements Plugin<Project> {
                 }else{
                     def remove=false
                     DynamicDependencyResolver resolver = new DynamicDependencyResolver(project)
+                  
                     return resolver.resolveToFiles(distribution,remove)
                 }
             }catch(Exception e){

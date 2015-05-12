@@ -44,7 +44,7 @@ class CopyFromSource {
 			closure.delegate=dry
 			closure.call()
 		}catch(Exception e){
-		      println "Could not evaluate assemble dependencies:"+e.getMessage()
+              project.logger.error("Could not evaluate assemble dependencies",e)
 		}
 	}
 

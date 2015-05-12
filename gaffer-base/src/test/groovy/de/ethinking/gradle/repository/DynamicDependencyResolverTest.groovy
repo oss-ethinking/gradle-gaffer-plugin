@@ -19,6 +19,8 @@ import org.gradle.api.Project
 import org.junit.Test;
 import org.gradle.testfixtures.ProjectBuilder
 
+import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
+
 class DynamicDependencyResolverTest {
 	
 	@Test

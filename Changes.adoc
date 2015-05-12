@@ -1,0 +1,18 @@
+= Release Notes
+Simon Mieth <sm@ethinking.de>
+v1.1, 2014-05-12 eThinking Changes
+:toc: left
+:toclevels: 4
+:source-highlighter: coderay
+:icons: font
+
+
+
+== 0.7.2
+
+Correct flatDependency handling
+
+
+== 0.7.1 
+
+Initial GitHub import
