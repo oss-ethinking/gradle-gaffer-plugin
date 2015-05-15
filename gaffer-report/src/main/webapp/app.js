@@ -14,9 +14,23 @@ myapp.controller('mainController', ['$scope', '$mdSidenav',
         };
 
         $scope.searchFilter = function (assemble) {
-
+        	for(var i=0;i<assemble['copyReports'].length;i++){
+                  var copy = assemble['copyReports'][i];
+                  for(var x=0;x<copy['files'].length;x++){
+                	  var file = copy['files'][x];
+                	  if(file['path'].indexOf($scope.queryFilter.query) > -1){
+                		  return true;
+                	  }
+                  }
+        	}
             return assemble.assemble.indexOf($scope.queryFilter.query) > -1;
         };
+        
+        $scope.searchFileFilter = function (file) {
+            return file['path'].indexOf($scope.queryFilter.query) > -1;
+        };
+        
+        
 
         $scope.content = "/templates/dashboard.html";
         $scope.toggleSidenav = function (menuId) {
