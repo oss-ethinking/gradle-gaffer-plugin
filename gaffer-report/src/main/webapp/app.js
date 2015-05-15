@@ -148,6 +148,7 @@ myapp.filter('fileSearch', function() {
 					if (files.length > 0) {
 						var fileHits = {};
 						fileHits['files'] = files;
+						fileHits['id'] = "copy_"+j+"_"+i;
 						copies.push(fileHits);
 					}
 				}
