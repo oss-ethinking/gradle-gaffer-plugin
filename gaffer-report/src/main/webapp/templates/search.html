@@ -1,10 +1,10 @@
 <md-input-container ng-init="clearSearch()">
     <label>Search</label>
-    <input type="text" ng-model="queryFilter.query"/>
+    <input type="text" ng-model="queryFilter.query" ng-model-options="{debounce: 500}"/>
 </md-input-container>
 <md-button ng-click="clearSearch()" class="md-raised">Clear</md-button>
 <ul>
-    <li ng-repeat="assemble in report.taskReports | filter:searchFilter">
+    <li ng-repeat="assemble in report | fileSearch:queryFilter">
         <assemble data="assemble"/>
     </li>
 </ul>
