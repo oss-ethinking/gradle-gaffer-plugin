@@ -15,28 +15,6 @@ myapp
 							$scope.clearSearch = function() {
 								$scope.queryFilter.query = null
 							};
-							$scope.searchFilter = function(assemble) {
-								console.log("filter assemble:"
-										+ assemble.assemble);
-								for (var i = 0; i < assemble['copyReports'].length; i++) {
-									var copy = assemble['copyReports'][i];
-									for (var x = 0; x < copy['files'].length; x++) {
-										var file = copy['files'][x];
-										if (file['path']
-												.indexOf($scope.queryFilter.query) > -1) {
-											return true;
-										}
-									}
-								}
-								return assemble.assemble
-										.indexOf($scope.queryFilter.query) > -1;
-							};
-
-							$scope.searchFileFilter = function(file) {
-								console.log("filter file:" + file['path']);
-								return file['path']
-										.indexOf($scope.queryFilter.query) > -1;
-							};
 
 							$scope.content = "/templates/dashboard.html";
 							$scope.toggleSidenav = function(menuId) {
@@ -177,8 +155,10 @@ myapp.filter('fileSearch', function() {
 					var hit = {};
 					hit['assemble'] = assemble.assemble;
 					hit['copyReports'] = copies;
+					hit['id']="resultID"+j;
 					results.push(hit);
 					console.log(hit)
+					
 				}
 			}
 			console.log("Search:" + results);

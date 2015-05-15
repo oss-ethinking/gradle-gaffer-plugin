@@ -4,7 +4,7 @@
 </md-input-container>
 <md-button ng-click="clearSearch()" class="md-raised">Clear</md-button>
 <ul>
-    <li ng-repeat="assemble in report | fileSearch:queryFilter">
+    <li ng-repeat="assemble in report | fileSearch:queryFilter track by assemble.id">
         <assemble data="assemble"/>
     </li>
 </ul>
