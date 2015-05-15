@@ -42,27 +42,37 @@ class DynamicDependencyResolver {
 
 
     def resolveToFiles(String dependencyNotation,boolean removeZipDir){
-      
+
         Dependency  dependency = project.dependencies.create(dependencyNotation)
         Configuration configuration = project.configurations.detachedConfiguration(dependency)
         configuration.setTransitive(false)
 
-        if(removeZipDir){
-            FileTree result = null
-            configuration.files.each {file ->
-                result = project.zipTree(file)
-            }
-            
-            Path path = Files.createTempDirectory("ziptemp")
-            File f = path.toFile()
-            f.deleteOnExit()
-            project.copy{
-                from  result
-                into f
-            }
-            File rootZipDirectory = f.listFiles()[0]
-            return rootZipDirectory
+
+        FileTree result = null
+        configuration.files.each {file ->
+            result = project.zipTree(file)
         }
+
+        Path path = Files.createTempDirectory("ziptemp")
+        File f = path.toFile()
+        f.deleteOnExit()
+        project.copy{
+            from  result
+            into f
+        }
+        File rootZipDirectory = f
+        if(removeZipDir){
+            rootZipDirectory = f.listFiles()[0]
+        }
+        return rootZipDirectory
+    }
+
+
+    def resolveToFile(String dependencyNotation){
+
+        Dependency  dependency = project.dependencies.create(dependencyNotation)
+        Configuration configuration = project.configurations.detachedConfiguration(dependency)
+        configuration.setTransitive(false)
 
         return configuration
     }

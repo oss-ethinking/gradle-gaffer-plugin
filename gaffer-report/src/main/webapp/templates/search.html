@@ -1,7 +1,8 @@
-<md-input-container>
+<md-input-container ng-init="clearSearch()">
     <label>Search</label>
     <input type="text" ng-model="queryFilter.query"/>
 </md-input-container>
+<md-button ng-click="clearSearch()" class="md-raised">Clear</md-button>
 <ul>
     <li ng-repeat="assemble in report.taskReports | filter:searchFilter">
         <assemble data="assemble"/>

@@ -207,36 +207,48 @@ class GafferBasePlugin  implements Plugin<Project> {
             return directory
         }
         
-        project.ext.distributionDependency= { String distribution ->
+        project.ext.distributionDependency= { String distributionDependency ->
             try{
                 if(project.gaffer.lifecycleState==LifecycleState.INITIALIZING){
                     return []
                 }else{
                     def remove=true
                     DynamicDependencyResolver resolver = new DynamicDependencyResolver(project)
-                    return resolver.resolveToFiles(distribution,remove)
+                    return resolver.resolveToFiles(distributionDependency,remove)
                 }
             }catch(Exception e){
-                project.logger.error("Faild on resolve distributionDependency:"+distribution,e);
+                project.logger.error("Faild on resolve distributionDependency:"+distributionDependency,e);
             }
         }
 
 
-        project.ext.flatDependency= { String distribution ->
+        project.ext.flatDependency= { String flatDependency ->
             try{
                 if(project.gaffer.lifecycleState==LifecycleState.INITIALIZING){
                     return []
                 }else{
                     def remove=false
                     DynamicDependencyResolver resolver = new DynamicDependencyResolver(project)
-                  
-                    return resolver.resolveToFiles(distribution,remove)
+                    return resolver.resolveToFiles(flatDependency,remove)
                 }
             }catch(Exception e){
-                project.logger.error("Faild on resolve flatDependency:"+distribution,e);
+                project.logger.error("Faild on resolve flatDependency:"+flatDependency,e);
             }
         }
 
+        
+        project.ext.dependency= { String dependency ->
+            try{
+                if(project.gaffer.lifecycleState==LifecycleState.INITIALIZING){
+                    return []
+                }else{
+                    DynamicDependencyResolver resolver = new DynamicDependencyResolver(project)
+                    return resolver.resolveToFile(dependency)
+                }
+            }catch(Exception e){
+                project.logger.error("Faild on resolve dependency:"+dependency,e);
+            }
+        }
 
         project.ext.searchProject= { String  name ->
             Project rootProject = project.getParent()

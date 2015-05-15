@@ -1,1 +1,6 @@
 {{assemble.assemble}}
+<ul ng-repeat="copy in assemble.copyReports">
+    <li ng-repeat="file in copy.files | filter:searchFileFilter">
+       {{file.path}}
+    </li>
+</ul>

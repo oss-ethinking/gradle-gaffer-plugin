@@ -7,12 +7,14 @@ var myapp = angular.module('app', ['ngMaterial', 'nvd3']);
 
 myapp.controller('mainController', ['$scope', '$mdSidenav',
     function ($scope, $mdSidenav) {
-        $scope.dateFormat = 'yyyy-MM-dd HH:mm:ss Z'
+        $scope.dateFormat = 'yyyy-MM-dd HH:mm:ss Z';
         $scope.report = report;
         $scope.queryFilter = {
             query: null
         };
-
+        $scope.clearSearch = function(){
+        	 $scope.queryFilter.query = null
+        };
         $scope.searchFilter = function (assemble) {
         	for(var i=0;i<assemble['copyReports'].length;i++){
                   var copy = assemble['copyReports'][i];
@@ -27,11 +29,10 @@ myapp.controller('mainController', ['$scope', '$mdSidenav',
         };
         
         $scope.searchFileFilter = function (file) {
+        	console.log("filter file:"+file['path']);
             return file['path'].indexOf($scope.queryFilter.query) > -1;
         };
         
-        
-
         $scope.content = "/templates/dashboard.html";
         $scope.toggleSidenav = function (menuId) {
             $mdSidenav(menuId).toggle();
@@ -94,7 +95,7 @@ myapp.controller('mainController', ['$scope', '$mdSidenav',
                 },
                 valueFormat: function (d) {
                     return d;
-                },
+                }
             }
         };
 

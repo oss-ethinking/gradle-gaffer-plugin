@@ -69,6 +69,9 @@ class BaseAssembleTask extends DefaultTask {
 		}
 		deploymentReport.addTaskReport(taskReport)
 	}
+    
+    
+
 
 	def assembleApplication(ApplicationAssemble assemble){
 		applyCopy(assemble.copyExtensions)

@@ -50,7 +50,8 @@ class CopyFromSource {
 
 
 	def doCopy(File targetDir,CopyReport report){
-
+        
+        closure.delegate=this
 		CopySpec copySpec = project.copySpec(closure)
 		if(!copySpec.getDuplicatesStrategy()){
 			copySpec.setDuplicatesStrategy(DuplicatesStrategy.INCLUDE)
