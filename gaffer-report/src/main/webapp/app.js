@@ -7,14 +7,16 @@ var myapp = angular.module('app', ['ngMaterial', 'nvd3']);
 
 myapp.controller('mainController', ['$scope', '$mdSidenav',
     function ($scope, $mdSidenav) {
-        $scope.dateFormat = 'yyyy-MM-dd HH:mm:ss Z'
+        $scope.dateFormat = 'yyyy-MM-dd HH:mm:ss Z';
         $scope.report = report;
         $scope.queryFilter = {
             query: null
         };
-
+        $scope.clearSearch = function(){
+            console.log('clear search');
+            // TODO add functionality
+        };
         $scope.searchFilter = function (assemble) {
-
             return assemble.assemble.indexOf($scope.queryFilter.query) > -1;
         };
 
@@ -80,7 +82,7 @@ myapp.controller('mainController', ['$scope', '$mdSidenav',
                 },
                 valueFormat: function (d) {
                     return d;
-                },
+                }
             }
         };
 
