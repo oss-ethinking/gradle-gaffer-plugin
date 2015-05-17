@@ -142,6 +142,7 @@ myapp.filter('fileSearch', function() {
 					for (var x = 0; x < copy['files'].length; x++) {
 						var file = copy['files'][x];
 						if (file['path'].indexOf(queryFilter.query) > -1) {
+							file['id']="file_"+j+"_"+i+"_"+x;
 							files.push(file);
 						}
 					}
@@ -158,11 +159,9 @@ myapp.filter('fileSearch', function() {
 					hit['copyReports'] = copies;
 					hit['id']="resultID"+j;
 					results.push(hit);
-					console.log(hit)
-					
 				}
 			}
-			console.log("Search:" + results);
+			
 		}
 		return results;
 	};

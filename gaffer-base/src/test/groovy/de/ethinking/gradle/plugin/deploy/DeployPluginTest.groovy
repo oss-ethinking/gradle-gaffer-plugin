@@ -87,8 +87,8 @@ class DeployPluginTest{
                           from project(':subproject-b').file('src/main/java')
                       }
                     }
-                    project 'subproject-b','runtimeWar'
-                    project 'subproject-a'
+                    warProject 'subproject-b','runtimeWar'
+                    warProject 'subproject-a'
                 }
             }
             gaffer{

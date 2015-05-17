@@ -349,8 +349,16 @@ class CopyFromSource {
 			dependencies.add("assemble-webapp-"+webapp)
 		}
 
-		projectDependencies.each{ String project ->
-			dependencies.add(project+":build")
+		projectDependencies.each{ String dependencyProject ->
+            Project p = project.rootProject.findProject(dependencyProject)
+            if(p){
+                Task task = p.tasks.findByName("build")
+                if(task){
+                    dependencies.add(dependencyProject+":build")
+                }else{
+                  project.getLogger().info("Project "+dependencyProject+" has no build task.")
+                }
+            }
 		}
 		taskDependencies.each { String taskPath ->
 			dependencies.add(taskPath)

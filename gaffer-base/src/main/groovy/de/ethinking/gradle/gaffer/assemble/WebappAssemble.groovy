@@ -26,17 +26,24 @@ class WebappAssemble extends BaseAssemble{
     }
 
 
-    public List<Task> createTaskDependencies(Project project){
-        List<Task> dependencies = []
+    public Set<String> createTaskDependencies(Project project){
+
+        Set<String> dependencies = new HashSet<String>()
+        copyExtensions.each{ CopyFromSource copy ->
+            dependencies.addAll(copy.createTaskDependencies())
+        }
         projects.each{ String dependencyProject ->
-            Project p = findProjectByName(dependencyProject, project)
+            Project p = project.rootProject.findProject(dependencyProject)
             if(p){
                 Task task = p.tasks.findByName("build")
                 if(task){
-                    dependencies.add(task)
+                    dependencies.add(dependencyProject+":build")
+                }else{
+                  project.getLogger().info("Project "+dependencyProject+" has no build task.")
                 }
             }
         }
+
         return dependencies
     }
 
@@ -45,15 +52,13 @@ class WebappAssemble extends BaseAssemble{
         this.name = name
     }
 
-    def project(String projectName){
+    def warProject(String projectName){
         if(lifecycleState == LifecycleState.INITIALIZING){
-            project(projectName,'runtimeWebapp')
-        }else{
-            return project.project(projectName)
+            warProject(projectName,'runtimeWebapp')
         }
     }
 
-    def project(String projectName,String configuration){
+    def warProject(String projectName,String configuration){
 
         WebappDependency dependency = new WebappDependency()
         dependency.project=projectName

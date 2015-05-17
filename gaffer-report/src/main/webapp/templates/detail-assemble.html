@@ -1,6 +1,6 @@
 {{assemble.assemble}}
 <ul ng-repeat="copy in assemble.copyReports  track by copy.id">
-    <li ng-repeat="file in copy.files">
+    <li ng-repeat="file in copy.files track by file.id">
        {{file.path}}
     </li>
 </ul>

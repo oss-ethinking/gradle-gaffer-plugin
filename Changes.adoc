@@ -7,6 +7,11 @@ v1.1, 2014-05-12 eThinking Changes
 :icons: font
 
 
+== 0.7.3
+
+* Added dependency handling for artifacts 
+* Enhanced angularJS report app
+
 
 == 0.7.2
 
