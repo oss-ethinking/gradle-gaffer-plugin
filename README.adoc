@@ -16,7 +16,7 @@ Include the following in your Gradle build script:
 [source, groovy]
 ----
 plugins {
-  id "de.ethinking.gaffer" version "0.7.2"
+  id "de.ethinking.gaffer" version "0.7.3"
 }
 ----
 
@@ -92,7 +92,7 @@ We use the gaffer plugin for assembling different web applications into applicat
 [source, groovy]
 ----
 plugins {
-  id "de.ethinking.gaffer" version "0.7.2"
+  id "de.ethinking.gaffer" version "0.7.3"
 }
 
 repositories{
