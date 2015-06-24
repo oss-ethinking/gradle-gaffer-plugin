@@ -170,3 +170,9 @@ gaffer{
   }
 }
 ----
+
+== Copyright and License
+
+Copyright 2014-2015 (c) http://ethinking.de[eThinking]  and contributors.
+
+All versions, present and past, of Gradle Gaffer Plugin are licensed under Apache 2.0 license.
