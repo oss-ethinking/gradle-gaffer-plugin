@@ -51,16 +51,16 @@ class BaseAssembleTask extends DefaultTask {
 	def BaseAssemble assemble
 
 
-	def applyCopy(List<CopyFromSource> copyExtensions){
+	def applyCopy(List<CopyFromSource> copyExtensions, BaseAssemble currentAssemble){
 
 		File toDirectory = targetDirectory
-		if(assemble.basePath){
-			toDirectory = new File(toDirectory,assemble.basePath)
+		if(currentAssemble.basePath){
+			toDirectory = new File(toDirectory,currentAssemble.basePath)
 		}
 		TaskReport taskReport = new TaskReport()
 		taskReport.name  = this.getName()
-		taskReport.assemble = assemble.name
-		taskReport.type=assemble.type
+		taskReport.assemble = currentAssemble.name
+		taskReport.type=currentAssemble.type
 		for(CopyFromSource source:copyExtensions){
 			CopyReport copyReport = new CopyReport()
 			copyReport.projects= source.getProjectDependencies()
@@ -74,7 +74,7 @@ class BaseAssembleTask extends DefaultTask {
 
 
 	def assembleApplication(ApplicationAssemble assemble){
-		applyCopy(assemble.copyExtensions)
+		applyCopy(assemble.copyExtensions,assemble)
 	}
 
 	def setTargetDirectory(File targetDirectory){
@@ -91,7 +91,7 @@ class BaseAssembleTask extends DefaultTask {
 
 
 	def assembleWebapp(WebappAssemble assemble){
-		applyCopy(assemble.copyExtensions)
+		applyCopy(assemble.copyExtensions,assemble)
 	}
 
 
@@ -160,6 +160,7 @@ class BaseAssembleTask extends DefaultTask {
 		OutputStream out = null
 
 		try {
+            
 			zipStream=new ZipInputStream(this.class.getResourceAsStream(resource));
 			// Get the first entry
 			ZipEntry entry = null;
@@ -180,6 +181,7 @@ class BaseAssembleTask extends DefaultTask {
 				}
 			}
 		} catch(Exception e){
+            println "Resource:"resource+" toFile:"+base
             e.printStackTrace()
 		} finally {
 			// Close the stream

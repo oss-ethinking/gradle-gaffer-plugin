@@ -39,6 +39,7 @@ public class ApplicationAssembleTask extends BaseAssembleTask{
 
 	@TaskAction
 	def assemble(){
+        project.delete(targetDirectory)
 		targetDirectory.mkdirs()
         assembleApplication(applicationAssemble);
 		report()

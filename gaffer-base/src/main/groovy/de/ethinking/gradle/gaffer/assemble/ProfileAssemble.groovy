@@ -78,7 +78,7 @@ class ProfileAssemble extends BaseAssemble {
 		Set<String> dependencies = new HashSet<String>()
 		applicationAssembles.each{ ApplicationAssemble applicationAssemble ->
 			dependencies.addAll(applicationAssemble.createTaskDependencies())
-			dependencies.add("assemble-application-"+applicationAssemble.name)
+			//dependencies.add("assemble-application-"+applicationAssemble.name)
 		}
 		return dependencies
 	}

@@ -14,10 +14,13 @@
  */
 package de.ethinking.gradle.plugin
 
+import java.util.List;
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.bundling.War
 import org.gradle.tooling.BuildException
+import org.gradle.api.tasks.Delete
 
 import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
 import de.ethinking.gradle.gaffer.assemble.ContainerAssemble
@@ -57,7 +60,7 @@ class GafferBasePlugin  implements Plugin<Project> {
         DeploymentReport report = new DeploymentReport()
         addApplicationTasks(project,report)
         addWebappTasks(project,report)
-        addProfileTasks(project, report)
+        //addProfileTasks(project, report)
         addContainerTasks(project, report)
     }
 
@@ -75,14 +78,23 @@ class GafferBasePlugin  implements Plugin<Project> {
     }
 
     def addWebappTasks(Project project,DeploymentReport report){
-        
+
         project.gaffer.webappAssembles.each{WebappAssemble  assemble ->
 
             File assembleTargetDir = new File(project.getBuildDir(),"assemble/webapp/"+assemble.name)
             //create assemble task
+
+            Set<String> webappDependencies = new HashSet<String>()
+
+            String cleanWebappTask = "cleanWebapp-"+assemble.name
+            project.task(cleanWebappTask,type:Delete){ delete assembleTargetDir }
+            webappDependencies.add(cleanWebappTask)
+
+
             String webappAssembleTaskName = "assemble-webapp-"+assemble.name
 
-            project.task(webappAssembleTaskName,dependsOn: assemble.createTaskDependencies(project),type:WebappAssembleTask,group:"webapp assemble"){
+            webappDependencies.addAll(assemble.createTaskDependencies(project))
+            project.task(webappAssembleTaskName,dependsOn: webappDependencies,type:WebappAssembleTask,group:"webapp assemble"){
                 setAssemble(assemble)
                 webappAssemble = assemble
                 deploymentReport = report
@@ -95,118 +107,83 @@ class GafferBasePlugin  implements Plugin<Project> {
         }
     }
 
-    def addProfileTasks(Project project,DeploymentReport report){
-        project.gaffer.profiles.each{ ProfileAssemble assemble ->
-            File assembleTargetDir = new File(project.getBuildDir(),"assemble/profile/"+assemble.name)
-            assemble.applicationAssembles.each{ ApplicationAssemble profileApplicationAssemble ->
-                File applicationAssembleTargetDir = new File(assembleTargetDir,profileApplicationAssemble.name)
 
-                ApplicationAssemble baseApplicationAssemble  = project.gaffer.findApplicationByName(profileApplicationAssemble.name)
-                if(baseApplicationAssemble && !assemble.basePath){
-                    assemble.basePath=baseApplicationAssemble.basePath
-                }
-                project.task("assemble-profile-"+assemble.name+"-application-"+profileApplicationAssemble.name,dependsOn:profileApplicationAssemble.createTaskDependencies(),type:ProfileApplicationAssembleTask,group:"profile assemble"){
-                    profileAssemble = assemble
-                    setAssemble(assemble)
-                    applicationAssemble = profileApplicationAssemble
-                    deploymentReport = report
-                    targetDirectory=applicationAssembleTargetDir
-                }
-            }
-        }
-    }
-
-
-    def addHostTasks(Project project,DeploymentReport report){
-
-
-    }
 
     def addContainerTasks(Project project,DeploymentReport report){
 
-
-        Set<String> allTasks = new  HashSet<String>()
-
         project.gaffer.containers.each{ ContainerAssemble containerAssemble ->
+
             Set<String> containerDependencies = new HashSet<String>()
+            Set<String> usedApplications = new HashSet<String>()
             File assembleTargetDir = new File(project.getBuildDir(),"assemble/container/"+containerAssemble.name)
+
+            String cleanContainerTask = "cleanContainer-"+containerAssemble.name
+            project.task(cleanContainerTask,type:Delete){ delete assembleTargetDir }
+            containerDependencies.add(cleanContainerTask)
+
+            List<ApplicationAssemble> applicationAssembles = []
+            List<ApplicationAssemble> profileAssembles = []
+
             containerAssemble.profiles.each { String profile ->
-
                 ProfileAssemble containerProfileAssemble = project.gaffer.findProfileByName(profile)
-
                 if(containerProfileAssemble){
-                    Set<String> profileDependencies = new  HashSet<String>()
+                    containerDependencies.addAll(containerProfileAssemble.createTaskDependencies())
                     //assemble all applications into container assemble directory
                     containerProfileAssemble.applicationAssembles.each{ ApplicationAssemble profileApplicationAssemble ->
+                        profileAssembles.add(profileApplicationAssemble)
+
                         ApplicationAssemble baseApplicationAssemble  = project.gaffer.findApplicationByName(profileApplicationAssemble.name)
                         if(baseApplicationAssemble){
-                            String taskName = "assemble-container-"+containerAssemble.name+"-application-"+baseApplicationAssemble.name
-                            if(!allTasks.contains(taskName)){
-                                project.task(taskName,dependsOn:baseApplicationAssemble.createTaskDependencies(),type:ApplicationAssembleTask,group:"application assemble"){
-                                    setAssemble(baseApplicationAssemble)
-                                    applicationAssemble = baseApplicationAssemble
-                                    deploymentReport = report
-                                    targetDirectory=assembleTargetDir
-                                }
-                                allTasks.add(taskName)
-                                profileDependencies.add(taskName)
+                            if(!usedApplications.contains(profileApplicationAssemble.name)){
+                                usedApplications.add(profileApplicationAssemble.name)
+                                applicationAssembles.add(baseApplicationAssemble)
+                                containerDependencies.addAll(baseApplicationAssemble.createTaskDependencies())
                             }
-
+                            if(!profileApplicationAssemble.basePath){
+                                profileApplicationAssemble.basePath=baseApplicationAssemble.basePath
+                            }
                         }else{
-                            println "No Application found:"+profileApplicationAssemble.name
+                            throw new BuildException("Application:"+profileApplicationAssemble.name+" referenced in profile:"+profile+" but not defined.",new Exception())
                         }
-                        profileDependencies.addAll(profileApplicationAssemble.createTaskDependencies());
-                        String taskName = "assemble-container-"+containerAssemble.name+"-profile-"+containerProfileAssemble.name+"-application-"+profileApplicationAssemble.name
-                        if(!profileApplicationAssemble.basePath){
-                            profileApplicationAssemble.basePath=baseApplicationAssemble.basePath
-                        }
-                        project.task(taskName,dependsOn:profileDependencies,type:ProfileApplicationAssembleTask,group:"profile assemble"){
-                            setAssemble(containerProfileAssemble)
-                            profileAssemble = containerProfileAssemble
-                            applicationAssemble = profileApplicationAssemble
-                            deploymentReport = report
-                            targetDirectory=assembleTargetDir
-                        }
-                        allTasks.add(taskName)
-                        containerDependencies.add(taskName)
+
                     }
                 }else{
                     throw new BuildException("Profile:"+profile+" referenced in container:"+containerAssemble.name+" but not defined.",new Exception())
                 }
             }
             containerAssemble.applications.each{ String applicationName ->
-
-                ApplicationAssemble applicationAssemble = project.gaffer.findApplicationByName(applicationName)
-                String taskName ="assemble-container-"+containerAssemble.name+"-application-"+applicationAssemble.name
-                if(!allTasks.contains(taskName)){
-                    project.task(taskName,dependsOn:applicationAssemble.createTaskDependencies(),type:ApplicationAssembleTask,group:"application assemble"){
-                        setAssemble(applicationAssemble)
-                        setApplicationAssemble(applicationAssemble)
-                        deploymentReport = report
-                        targetDirectory=assembleTargetDir
+                if(!usedApplications.contains(applicationName )){
+                    usedApplications.add(applicationName)
+                    ApplicationAssemble applicationAssemble = project.gaffer.findApplicationByName(applicationName)
+                    if(applicationAssemble){
+                        applicationAssembles.add(applicationAssemble)
+                        containerDependencies.addAll(applicationAssemble.createTaskDependencies())
+                    }else{
+                        throw new BuildException("Application:"+applicationName+" referenced in container:"+containerAssemble.name+" but not defined.",new Exception())
                     }
-                    allTasks.add(taskName)
-                    containerDependencies.add(taskName)
                 }
             }
 
             String taskName = "assemble-container-"+containerAssemble.name
-            project.task(taskName,dependsOn:containerDependencies,type:ContainerAssembleTask,group:"container assemble"){
-                setAssemble(containerAssemble)
-                setContainerAssemble(containerAssemble)
-                targetDirectory=assembleTargetDir
-                deploymentReport = report
-            }
+
+            ContainerAssembleTask containerTask = project.task(taskName,dependsOn:containerDependencies,type:ContainerAssembleTask,group:"container assemble")
+            containerTask.setAssemble(containerAssemble)
+            containerTask.setContainerAssemble(containerAssemble)
+            containerTask.targetDirectory=assembleTargetDir
+            containerTask.deploymentReport = report
+            containerTask.applicationAssembles.addAll(applicationAssembles)
+            containerTask.profileApplicationAssembles.addAll(profileAssembles)
+
         }
     }
 
- 
-       public static void addClosures(Project project){
+
+    public static void addClosures(Project project){
         project.ext.webapp = { String webappName ->
             def directory = new File(project.getBuildDir(),"assemble/webapp/"+webappName)
             return directory
         }
-        
+
         project.ext.distributionDependency= { String distributionDependency ->
             try{
                 if(project.gaffer.lifecycleState==LifecycleState.INITIALIZING){
@@ -236,7 +213,7 @@ class GafferBasePlugin  implements Plugin<Project> {
             }
         }
 
-        
+
         project.ext.dependency= { String dependency ->
             try{
                 if(project.gaffer.lifecycleState==LifecycleState.INITIALIZING){

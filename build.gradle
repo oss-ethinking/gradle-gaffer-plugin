@@ -13,7 +13,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 
 
-version='0.7.3'
+version='0.8.0'
 
 
 
@@ -49,7 +49,6 @@ group='de.ethinking.gradle'
 
 
 subprojects {
-    apply plugin: 'groovy'
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	group=parent.group
@@ -59,15 +58,11 @@ subprojects {
 	
 	repositories { mavenCentral() }
 
-	dependencies {
-		compile gradleApi()
-		compile localGroovy()
-	}
 
 
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.4'
+	gradleVersion = '2.5'
 }
 

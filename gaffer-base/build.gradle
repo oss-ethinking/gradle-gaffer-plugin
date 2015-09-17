@@ -10,7 +10,7 @@ buildscript {
 }
   
   
-
+apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: "com.gradle.plugin-publish"
 
@@ -22,6 +22,12 @@ jar {
     into('report') {
         from project(':gaffer-report').bundle.outputs.files
     }
+}
+
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
 }
 
 

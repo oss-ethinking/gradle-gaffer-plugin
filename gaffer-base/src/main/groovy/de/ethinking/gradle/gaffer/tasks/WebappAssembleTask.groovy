@@ -33,6 +33,7 @@ class WebappAssembleTask extends BaseAssembleTask{
 
 	@TaskAction
 	def assemble(){
+        project.delete(targetDirectory)
 		targetDirectory.mkdirs()
 		assembleWebapp(webappAssemble)
 		report()

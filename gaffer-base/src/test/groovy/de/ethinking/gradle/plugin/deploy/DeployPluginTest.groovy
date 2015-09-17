@@ -146,7 +146,6 @@ class DeployPluginTest{
         assertTrue(extensionProject.tasks.getByName('assemble-webapp-mywebapp') instanceof WebappAssembleTask)
         assertTrue(extensionProject.tasks.getByName('assemble-application-tomcat') instanceof ApplicationAssembleTask)
         assertTrue(extensionProject.gaffer.findProfileByName('frontend').createTaskDependencies().contains("assemble-webapp-webapp1"))
-        assertTrue(extensionProject.gaffer.findProfileByName('frontend').createTaskDependencies().contains("assemble-application-tomcat"))
         assertTrue(extensionProject.gaffer.findProfileByName('base').createTaskDependencies().contains(":subproject-a:jar"))
     }
 
@@ -288,17 +287,17 @@ class DeployPluginTest{
         assertEquals(2,extensionProject.gaffer.containers[0].profiles.size())
         assertEquals(0,extensionProject.gaffer.containers[1].profiles.size())
         assertEquals(1,extensionProject.gaffer.containers[1].applications.size())
-        assertTrue(extensionProject.tasks.getByName('assemble-profile-frontend-application-tomcat') instanceof ProfileApplicationAssembleTask)
-        assertTrue(extensionProject.tasks.getByName('assemble-container-test-application-tomcat') instanceof ApplicationAssembleTask)
-        assertNotNull(extensionProject.tasks.getByName('assemble-container-test-application-tomcat').applicationAssemble)
-        assertNotNull(extensionProject.tasks.getByName('assemble-container-test-application-tomcat').assemble)
+        //assertTrue(extensionProject.tasks.getByName('assemble-profile-frontend-application-tomcat') instanceof ProfileApplicationAssembleTask)
+//        assertTrue(extensionProject.tasks.getByName('assemble-container-test-application-tomcat') instanceof ApplicationAssembleTask)
+//        assertNotNull(extensionProject.tasks.getByName('assemble-container-test-application-tomcat').applicationAssemble)
+//        assertNotNull(extensionProject.tasks.getByName('assemble-container-test-application-tomcat').assemble)
 
         assertNotNull(extensionProject.gaffer.containers[1].params.env)
         assertEquals("value1",extensionProject.gaffer.containers[1].params.env.param1)
         assertEquals("value2",extensionProject.gaffer.containers[1].params.env.param2)
 
 
-        assertTrue(extensionProject.tasks.getByName('assemble-container-test-application-tomcat').taskDependencies.getDependencies().contains(subProjectA.jar))
+        assertTrue(extensionProject.tasks.getByName('assemble-container-test').taskDependencies.getDependencies().contains(subProjectA.jar))
     }
 
 
@@ -343,7 +342,7 @@ class DeployPluginTest{
         assertEquals(1,extensionProject.gaffer.containers.size())
         assertEquals('frontend',extensionProject.gaffer.containers[0].name)
         assertEquals(2,extensionProject.gaffer.containers[0].profiles.size())
-        assertTrue(extensionProject.tasks.getByName('assemble-profile-frontend-application-tomcat') instanceof ProfileApplicationAssembleTask)
+        //assertTrue(extensionProject.tasks.getByName('assemble-profile-frontend-application-tomcat') instanceof ProfileApplicationAssembleTask)
         assertEquals('live',extensionProject.tasks.getByName('assemble-container-frontend').params.escenicFamily)
     }
 
