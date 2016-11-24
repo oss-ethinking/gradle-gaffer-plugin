@@ -7,6 +7,19 @@ v1.1, 2014-05-12 eThinking Changes
 :icons: font
 
 
+== 0.8.1
+ * correct order of profile assembling
+
+
+== 0.8.0
+
+* merged profile assemble task into the container assemble task
+* always cleanup assemble directory
+* removed uneeded assemble tasks
+
+
+
+
 == 0.7.3
 
 * Added dependency handling for artifacts 
