@@ -8,7 +8,7 @@ import de.ethinking.gradle.gaffer.assemble.BaseAssemble.Type
 class ContainerAssemble extends BaseAssemble{
 
 	def buildfile
-	Set<String> profiles = new HashSet<String>()
+	List<String> profiles = new ArrayList<String>()
 	Set<String> applications = new HashSet<String>()
 
 	
