@@ -1,7 +1,5 @@
-plugins { id "org.kordamp.gradle.livereload" version "0.2.1" }
-
 apply plugin:'war'
-apply plugin:'jetty'
+
 
 
 version = ''
@@ -26,27 +24,5 @@ task bundle(type: Zip) {
 		}
 		exclude 'report.js'
 		exclude 'WEB-INF'
-}
-
-
-httpPort=8080
-stopPort=8091
-jettyRun.contextPath = '/'
-jettyRun.webAppSourceDirectory = project.file("src/main/webapp")
-jettyRun.scanIntervalSeconds=1
-
-liveReload{
-	
-	doFirst {
-		jettyRun.daemon = true
-		jettyRun.execute()
-	}
-	
-	doLast {
-		jettyStop.execute()
-	}
-	
-	docRoot = project.file("src/main/webapp")
-	
 }
 

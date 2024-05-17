@@ -15,25 +15,18 @@
 */
 package de.ethinking.gradle.gaffer.tasks;
 
-import java.io.File
-
 import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
-import de.ethinking.gradle.gaffer.assemble.CopyFromSource
-import de.ethinking.gradle.gaffer.report.DeploymentReport
 
-import org.gradle.api.DefaultTask
-import org.gradle.api.Project
-import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
 public class ApplicationAssembleTask extends BaseAssembleTask{
 
 	static Logger LOG = Logging.getLogger(ApplicationAssembleTask.class)
-
+   
+    @Internal
 	ApplicationAssemble applicationAssemble
 
 

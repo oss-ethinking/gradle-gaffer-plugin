@@ -17,11 +17,15 @@ package de.ethinking.gradle.gaffer.tasks
 
 import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
 import de.ethinking.gradle.gaffer.assemble.ProfileAssemble
+
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
 class ProfileApplicationAssembleTask extends BaseAssembleTask {
 	
+    @Internal
 	ApplicationAssemble applicationAssemble
+    @Internal
 	ProfileAssemble profileAssemble
 	
 	@TaskAction

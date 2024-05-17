@@ -1,6 +1,5 @@
 package de.ethinking.gradle.gaffer.assemble
 
-import java.util.Map
 
 import org.gradle.api.Project
 import de.ethinking.gradle.gaffer.assemble.BaseAssemble.Type

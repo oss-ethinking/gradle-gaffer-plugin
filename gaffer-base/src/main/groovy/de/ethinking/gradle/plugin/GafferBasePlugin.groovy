@@ -14,7 +14,7 @@
  */
 package de.ethinking.gradle.plugin
 
-import java.util.List;
+
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -32,7 +32,6 @@ import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
 import de.ethinking.gradle.gaffer.tasks.ApplicationAssembleTask
 import de.ethinking.gradle.gaffer.tasks.ContainerAssembleTask
-import de.ethinking.gradle.gaffer.tasks.ProfileApplicationAssembleTask
 import de.ethinking.gradle.gaffer.tasks.WebappAssembleTask
 
 class GafferBasePlugin  implements Plugin<Project> {

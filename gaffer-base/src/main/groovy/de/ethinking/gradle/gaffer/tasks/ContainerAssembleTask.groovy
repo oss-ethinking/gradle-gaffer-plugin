@@ -14,6 +14,8 @@
  */
 package de.ethinking.gradle.gaffer.tasks
 
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 
 
@@ -23,9 +25,11 @@ import de.ethinking.gradle.gaffer.assemble.ProfileAssemble
 
 class ContainerAssembleTask extends BaseAssembleTask{
 
-
+    @Internal
     ContainerAssemble containerAssemble
+    @Internal
     List<ApplicationAssemble> applicationAssembles = []
+    @Internal
     List<ApplicationAssemble> profileApplicationAssembles = []
 
     @TaskAction
@@ -44,6 +48,8 @@ class ContainerAssembleTask extends BaseAssembleTask{
         this.containerAssemble = containerAssemble
     }
 
+    
+    @Input
     def getParams(){
         return containerAssemble.params
     }

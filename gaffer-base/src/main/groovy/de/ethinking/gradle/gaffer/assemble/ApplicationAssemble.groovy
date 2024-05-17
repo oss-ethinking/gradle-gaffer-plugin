@@ -1,18 +1,8 @@
 package de.ethinking.gradle.gaffer.assemble
 
-import java.io.File;
 
 import de.ethinking.gradle.gaffer.assemble.BaseAssemble.Type
-import de.ethinking.gradle.gaffer.report.DeploymentReport
-import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
-import de.ethinking.gradle.gaffer.LifecycleState
-
 import org.gradle.api.Project
-import org.gradle.api.file.CopySpec
-
-import java.nio.file.Paths
-import java.nio.file.Path
-import java.util.Set
 
 class ApplicationAssemble extends BaseAssemble{
 

@@ -15,9 +15,6 @@
 */
 package de.ethinking.gradle.gaffer.report
 
-import java.util.List;
-import java.util.Set;
-
 import org.gradle.api.file.FileCopyDetails;
 
 class CopyReport {

@@ -16,7 +16,6 @@
 package de.ethinking.gradle.gaffer.tasks
 
 
-import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
@@ -24,30 +23,30 @@ import de.ethinking.gradle.gaffer.assemble.ApplicationAssemble
 import de.ethinking.gradle.gaffer.assemble.BaseAssemble
 import de.ethinking.gradle.gaffer.assemble.CopyFromSource
 import de.ethinking.gradle.gaffer.assemble.WebappAssemble
-import de.ethinking.gradle.gaffer.assemble.WebappAssemble.WebappDependency
 import de.ethinking.gradle.gaffer.report.CopyReport
 import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.gaffer.report.TaskReport
-import de.ethinking.gradle.gaffer.repository.DynamicDependencyResolver;
 
-import org.codehaus.groovy.ast.ClassNode
+
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
-import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
-import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.TaskAction
-import org.gradle.tooling.BuildException
 
 import groovy.json.*
 
 
 class BaseAssembleTask extends DefaultTask {
-
+    
+    static Logger LOG = Logging.getLogger(BaseAssembleTask.class)
+    
+    @OutputDirectory
 	def File targetDirectory
+    @Internal
 	def DeploymentReport deploymentReport
+    @Internal
 	def BaseAssemble assemble
 
 
@@ -181,8 +180,7 @@ class BaseAssembleTask extends DefaultTask {
 				}
 			}
 		} catch(Exception e){
-            println "Resource:"resource+" toFile:"+base
-            e.printStackTrace()
+            LOG.error("Failed to explode resource:"+resource+" toFile:"+base,e)
 		} finally {
 			// Close the stream
 			if (zipStream != null) {

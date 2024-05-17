@@ -1,14 +1,10 @@
 package de.ethinking.gradle.gaffer.assemble
 
-import java.util.List
-
-import groovy.lang.Closure
 
 
 
 import org.gradle.api.Project
 
-import de.ethinking.gradle.gaffer.report.DeploymentReport
 import de.ethinking.gradle.gaffer.LifecycleState
 
 class ProfileAssemble extends BaseAssemble {
