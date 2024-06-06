@@ -58,12 +58,12 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'jacoco'
-	
+
 	group=parent.group
 	version=parent.version
-	
+
 	sourceCompatibility = 1.7
-	
+
 	repositories { mavenCentral() }
 
 
@@ -71,6 +71,6 @@ subprojects {
 }
 
 wrapper{
-	gradleVersion = '6.8'
+	gradleVersion = '7.8'
 }
 

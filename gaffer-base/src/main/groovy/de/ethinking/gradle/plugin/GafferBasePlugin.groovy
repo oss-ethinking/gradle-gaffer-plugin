@@ -101,7 +101,7 @@ class GafferBasePlugin  implements Plugin<Project> {
             }
             project.task("war-"+assemble.name,type:War,dependsOn:webappAssembleTaskName){
                 from assembleTargetDir
-                archiveName=assemble.name+".war"
+                archiveFileName=assemble.name+".war"
             }
         }
     }

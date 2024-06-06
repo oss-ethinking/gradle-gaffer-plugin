@@ -2,7 +2,9 @@ package de.ethinking.gradle.gaffer.assemble
 
 import de.ethinking.gradle.gaffer.report.CopyReport
 import de.ethinking.gradle.gaffer.LifecycleState
-
+import org.gradle.api.file.ConfigurableFilePermissions
+import org.gradle.api.file.ExpandDetails
+import org.gradle.api.provider.Property
 
 import java.util.regex.Pattern;
 
@@ -145,6 +147,26 @@ class CopyFromSource {
         }
 
         @Override
+        Property<ConfigurableFilePermissions> getFilePermissions() {
+            return null
+        }
+
+        @Override
+        CopyProcessingSpec filePermissions(Action<? super ConfigurableFilePermissions> configureAction) {
+            return null
+        }
+
+        @Override
+        Property<ConfigurableFilePermissions> getDirPermissions() {
+            return null
+        }
+
+        @Override
+        CopyProcessingSpec dirPermissions(Action<? super ConfigurableFilePermissions> configureAction) {
+            return null
+        }
+
+        @Override
         public CopyProcessingSpec setFileMode(Integer arg0) {
             // TODO Auto-generated method stub
             return null;
@@ -202,6 +224,11 @@ class CopyFromSource {
         public CopySpec expand(Map<String, ?> arg0) {
             // TODO Auto-generated method stub
             return null;
+        }
+
+        @Override
+        CopySpec expand(Map<String, ?> properties, Action<? super ExpandDetails> action) {
+            return null
         }
 
         @Override
