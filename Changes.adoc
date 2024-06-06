@@ -19,7 +19,6 @@ v1.1, 2014-05-12 eThinking Changes
 
 
 
-
 == 0.7.3
 
 * Added dependency handling for artifacts 
