@@ -60,7 +60,8 @@ class BaseAssembleTask extends DefaultTask {
 		taskReport.name  = this.getName()
 		taskReport.assemble = currentAssemble.name
 		taskReport.type=currentAssemble.type
-		for(CopyFromSource source:copyExtensions){
+        List<CopyFromSource> tempList = new ArrayList(copyExtensions)
+		for(CopyFromSource source:tempList){
 			CopyReport copyReport = new CopyReport()
 			copyReport.projects= source.getProjectDependencies()
 			source.doCopy(toDirectory,copyReport)

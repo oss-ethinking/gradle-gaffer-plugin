@@ -8,6 +8,8 @@
 .idea
 *.iml
 .DS_Store
+.sonarlint
+.metadata
 
 build
 bin

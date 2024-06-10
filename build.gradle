@@ -1,54 +1,8 @@
-buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.0'
-		classpath 'com.github.jruby-gradle:jruby-gradle-plugin:0.1.5'
-	}
-}
-
 plugins {
   id "org.sonarqube" version "3.3"
 }
 
-
-apply plugin: 'org.asciidoctor.gradle.asciidoctor'
-apply plugin: 'com.github.jruby-gradle.base'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-
-
 version='0.9.1'
-
-
-
-dependencies{
-	gems 'rubygems:asciidoctor-diagram:1.2.0'
-}
-
-asciidoctorj{
-	version = '1.5.1'
-}
-
-asciidoctor {
-	//version = '1.5.1'
-	backends = ["html5"]
-    outputDir = new File("$buildDir/docs")
-    options = [
-        doctype: 'book',
-        attributes: [
-            'source-highlighter': 'coderay',
-            toc                 : '',
-            idprefix            : '',
-            idseparator         : '-'
-        ]
-    ]
-	dependsOn jrubyPrepareGems
-	requires = ['asciidoctor-diagram']
-	gemPath = jrubyPrepareGems.outputDir
-}
-
 
 
 group='de.ethinking.gradle'
@@ -56,21 +10,13 @@ group='de.ethinking.gradle'
 
 subprojects {
 	apply plugin: 'java'
-	apply plugin: 'eclipse'
 	apply plugin: 'jacoco'
 
 	group=parent.group
 	version=parent.version
 
-	sourceCompatibility = 1.7
+	sourceCompatibility = 1.11
 
 	repositories { mavenCentral() }
 
-
-
 }
-
-wrapper{
-	gradleVersion = '7.8'
-}
-

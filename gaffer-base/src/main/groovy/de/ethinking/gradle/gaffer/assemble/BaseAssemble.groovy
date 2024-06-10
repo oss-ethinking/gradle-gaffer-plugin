@@ -14,7 +14,7 @@ class BaseAssemble {
 
     def Project project
     def String name
-    def List<CopyFromSource> copyExtensions  = []
+    def List<CopyFromSource> copyExtensions  = new ArrayList()
     def LifecycleState lifecycleState = LifecycleState.INITIALIZING
     def Map params = new HashMap<String,Object>()
     def String basePath
